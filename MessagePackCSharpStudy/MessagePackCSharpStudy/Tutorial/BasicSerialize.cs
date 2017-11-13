@@ -68,6 +68,23 @@ namespace MessagePackCSharpStudy.Tutorial
 			// 文字列の方がコストかかるけれど、色がつく
 			Console.WriteLine(MessagePackSerializer.ToJson(new Sample3 { Foo = 10, Bar = 20 }));
 
+			// Jsonからクラスにデシリアライズする。
+			// Json生成
+			var json = MessagePackSerializer.ToJson(new Sample2 { Foo = 10, Bar = 20 });
+			// こちらではエラー
+//			var jsonByte = MessagePackSerializer.Serialize(json);
+			// FromJsonでbyteを作る必要がある。
+			var jsonByte = MessagePackSerializer.FromJson(json);
+			var classObjectFromJson = MessagePackSerializer.Deserialize<Sample2>(jsonByte);
+
+			// attributeが文字列ではなく数字の場合
+			var json2 = MessagePackSerializer.ToJson(new Sample1 { Foo = 10, Bar = 20 });
+			// 生成されるbyteが半分
+			var jsonByte2 = MessagePackSerializer.FromJson(json2);
+			var classObjectFromJson2 = MessagePackSerializer.Deserialize<Sample1>(jsonByte2);
+
+
+
 			// 番外編 キーで指定した個所に保持されてしまう。
 			// [null,null,null,0,null,null,null,null,null,null,0]
 			Console.WriteLine(MessagePackSerializer.ToJson(new IntKeySample()));
