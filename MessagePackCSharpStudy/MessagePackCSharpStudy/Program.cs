@@ -14,7 +14,9 @@ namespace MessagePackCSharpStudy
 		{
 			var basicSerialize = new BasicSerialize();
 			basicSerialize.DoSerialize();
-			
+
+			var resolverSerialize = new ResolverSerialize();
+			resolverSerialize.DoResolverSerialize();
 		}
 	}
 }

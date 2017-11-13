@@ -56,6 +56,13 @@ namespace MessagePackCSharpStudy.Tutorial
 
 			// {"foo":10,"bar":20}
 			Console.WriteLine(MessagePackSerializer.ToJson(new Sample2 { Foo = 10, Bar = 20 }));
+			var data = new Sample2 { Foo = 10, Bar = 20 };
+			var bin = MessagePackSerializer.Serialize(data);
+			
+			// バイナリから型にデシリアライズ
+			var classObject = MessagePackSerializer.Deserialize<Sample2>(bin);
+			// バイナリからdynamicにデシリアライズ
+			var dynamicObject = MessagePackSerializer.Deserialize<dynamic>(bin);
 
 			// {"Foo":10}
 			// 文字列の方がコストかかるけれど、色がつく
